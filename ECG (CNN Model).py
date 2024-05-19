@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[39]:
+# In[1]:
 
 
 import numpy as np
@@ -16,7 +16,7 @@ from sklearn.model_selection import StratifiedKFold
 import pandas as pd
 
 
-# In[40]:
+# In[2]:
 
 
 datasetdf_path = 'New data.csv'
@@ -27,7 +27,7 @@ datasetdf_df = pd.read_csv(datasetdf_path)
 print(datasetdf_df.head())
 
 
-# In[41]:
+# In[3]:
 
 
 def collect_and_label(dataset):
@@ -41,14 +41,14 @@ def collect_and_label(dataset):
     return df
 
 
-# In[42]:
+# In[4]:
 
 
 df_labeled = collect_and_label('New data.csv')
 print(df_labeled.head())
 
 
-# In[43]:
+# In[5]:
 
 
 label_counts = Counter(df_labeled['label'])
@@ -56,7 +56,7 @@ for label, count in label_counts.items():
     print(f"Label '{label}' has {count} records.")
 
 
-# In[44]:
+# In[6]:
 
 
 plt.bar(label_counts.keys(), label_counts.values())
@@ -66,7 +66,7 @@ plt.title('Frequency of Each Class in the Dataset')
 plt.show()
 
 
-# In[45]:
+# In[7]:
 
 
 import pandas as pd
@@ -81,7 +81,7 @@ data = df_labeled[df_labeled['label'].isin(['NORM', 'IMI'])]
 print(data.head())
 
 
-# In[46]:
+# In[8]:
 
 
 label_counts = Counter(data['label'])
@@ -89,7 +89,7 @@ for label, count in label_counts.items():
     print(f"Label '{label}' has {count} records.")
 
 
-# In[47]:
+# In[9]:
 
 
 from sklearn.preprocessing import LabelEncoder
@@ -106,7 +106,7 @@ def balance_and_augment(df):
     return df_balanced
 
 
-# In[48]:
+# In[10]:
 
 
 # Collecting and labeling dataset
@@ -119,7 +119,7 @@ df_balanced_and_augmented = balance_and_augment(data)
 print(df_balanced_and_augmented.head())
 
 
-# In[49]:
+# In[11]:
 
 
 label_counts = Counter(df_balanced_and_augmented['label'])
@@ -127,19 +127,19 @@ for label, count in label_counts.items():
     print(f"Label '{label}' has {count} records.")
 
 
-# In[50]:
+# In[12]:
 
 
 df_balanced_and_augmented=df_balanced_and_augmented.sample(frac = 1 , ignore_index=True, random_state=123)
 
 
-# In[51]:
+# In[13]:
 
 
 df_balanced_and_augmented
 
 
-# In[52]:
+# In[14]:
 
 
 # Identify missing values
@@ -148,14 +148,14 @@ print("Missing values:")
 print(missing_values)  
 
 
-# In[53]:
+# In[15]:
 
 
 # Display the first record from the DataFrame
 print(df_balanced_and_augmented.iloc[200])
 
 
-# In[54]:
+# In[16]:
 
 
 import numpy as np
@@ -203,7 +203,7 @@ df_balanced_and_augmented['filtered_lead_1_channel_0'] = filtered_signals
 print(df_balanced_and_augmented)
 
 
-# In[55]:
+# In[17]:
 
 
 import matplotlib.pyplot as plt
@@ -216,7 +216,7 @@ from keras import regularizers
 from sklearn.model_selection import train_test_split
 
 
-# In[56]:
+# In[18]:
 
 
 def read_signal(record):
@@ -225,7 +225,7 @@ def read_signal(record):
     return signal
 
 
-# In[57]:
+# In[19]:
 
 
 def preprocess(dat):
@@ -238,7 +238,7 @@ def preprocess(dat):
     return np.array(data_signal)  , np.array(encoded_label)
 
 
-# In[58]:
+# In[20]:
 
 
 from sklearn.model_selection import train_test_split
@@ -255,7 +255,7 @@ print("Validation size:", len(validation))
 print("Test size:", len(test))
 
 
-# In[59]:
+# In[21]:
 
 
 print(train.shape)
@@ -263,7 +263,7 @@ print(validation.shape)
 print(test.shape)
 
 
-# In[60]:
+# In[22]:
 
 
 X_train , y_train = preprocess(train)
@@ -271,7 +271,7 @@ X_valid , y_valid = preprocess(validation)
 X_test  , y_test  = preprocess(test) 
 
 
-# In[61]:
+# In[23]:
 
 
 print(X_train.shape)
@@ -282,7 +282,7 @@ print(X_test.shape)
 print(y_test.shape)
 
 
-# In[62]:
+# In[24]:
 
 
 # Reshape input data to add the timestep dimension
@@ -291,7 +291,7 @@ X_valid = X_valid.reshape(X_valid.shape[0], X_valid.shape[1], 1)
 X_test = X_test.reshape(X_test.shape[0], X_test.shape[1], 1)
 
 
-# In[63]:
+# In[25]:
 
 
 import keras
@@ -337,7 +337,7 @@ y_pred_proba = model.predict(X_test)
 
 
 
-# In[81]:
+# In[26]:
 
 
 import numpy as np
@@ -403,7 +403,7 @@ print("Sensitivity (Recall) with Optimal Threshold:", sensitivity_optimal)
 print("Specificity with Optimal Threshold:", specificity_optimal)
 
 
-# In[1]:
+# In[7]:
 
 
 import matplotlib.pyplot as plt
@@ -430,7 +430,7 @@ plt.legend()
 plt.show()
 
 
-# In[83]:
+# In[28]:
 
 
 import matplotlib.pyplot as plt
